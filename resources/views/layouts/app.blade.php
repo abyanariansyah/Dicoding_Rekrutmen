@@ -74,5 +74,8 @@
 
         @yield('content')
     </div>
+
+    <!-- Vite - Loads app.js which includes API client -->
+    @vite(['resources/js/app.js'])
 </body>
 </html>

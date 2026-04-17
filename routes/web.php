@@ -17,12 +17,12 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::get('/jobs', [ApplicationController::class, 'jobs'])->name('jobs.index');
-Route::get('/jobs/{job}/apply', [ApplicationController::class, 'create'])->name('jobs.apply');
-Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])->name('jobs.apply.store');
-Route::get('/applications', [ApplicationController::class, 'mine'])->name('applications.mine');
+Route::get('/jobs/{job}/apply', [ApplicationController::class, 'create'])->middleware('auth')->name('jobs.apply');
+Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])->middleware('auth')->name('jobs.apply.store');
+Route::get('/applications', [ApplicationController::class, 'mine'])->middleware('auth')->name('applications.mine');
 
 Route::get('/company/setup', [CompanyController::class, 'create'])->name('company.create');
 Route::post('/company/setup', [CompanyController::class, 'store'])->name('company.store');
